@@ -94,4 +94,82 @@ void reverse_string(char *str)
         j--;
     }
 }
+//check whether string is palindrome or not
+int check_palindrome(char *str)
+{
+    int i=0,j=length(str)-1;
+    while(i<j)
+    {
+        if(str[i]!=str[j])
+        {
+            return 0;
+        }
+        i++;
+        j--;
+    }
+    return 1;
+}
+//compare the strings
+int compare_strings(char *str1,char *str2)
+{
+    int i=0;
+    while(str1[i]!='\0' && str2[i]!='\0')
+    {
+        if(str1[i]!=str2[i])
+        {
+            return 0;
+        }
+        i++;
+    }
+    if(str1[i]=='\0' && str2[i]=='\0')
+    {
+        return 1;
+    }
+    return 0;
+}
+//There are 3 methods  to find duplicate characters in a string
+//1.Compare with other letters
+//2.Using hashtable
+//3.Using bitwise operation
 
+void find_duplicate_characters(char *str)
+{
+    int i=0,j=0;
+    while(str[i]!='\0')
+    {
+        j=i+1;
+        while(str[j]!='\0')
+        {
+            if(str[i]==str[j])
+            {
+                printf("%c\n",str[i]);
+            }
+            j++;
+        }
+        i++;
+    }
+}
+//There are 2 options either we assume only certain ascii codes are present or we take the whole ascii range 0-122 but lets assume only lower case letters are present
+void find_duplicate_hash(char *str)
+{
+    int i =0;
+    int B[25];
+    for(i=0;i<26;i++)
+    {
+        B[i]=0;
+    }
+    for(i=0;i<26;i++)
+    {
+        B[str[i]-97]++;
+    }
+    for(i=0;i<26;i++)
+    {
+        if(B[i]>1)
+        {
+            printf("character %c is repeated %d times",i+97,B[i]);
+        }
+    }
+
+   
+
+}
