@@ -158,7 +158,7 @@ void find_duplicate_hash(char *str)
     {
         B[i]=0;
     }
-    for(i=0;i<26;i++)
+    for(i=0;str[i]!='\0';i++)
     {
         B[str[i]-97]++;
     }
