@@ -153,11 +153,8 @@ void find_duplicate_characters(char *str)
 void find_duplicate_hash(char *str)
 {
     int i =0;
-    int B[25];
-    for(i=0;i<26;i++)
-    {
-        B[i]=0;
-    }
+    int B[26];//zero is automatically filled
+    
     for(i=0;str[i]!='\0';i++)
     {
         B[str[i]-97]++;
