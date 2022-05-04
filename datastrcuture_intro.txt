@@ -1,0 +1,40 @@
+program and data has to be brought in to main memory in order to be executed
+data structures are formed in main memory and are then brought in to the execution memory
+Commerical computer has a lot of memory and it is not possible to store all the data in main memory
+Commercial data is stored in the form of files
+Database means a collection of data arranged in a database
+Data minning is the process of extracting data from a large amount of data
+Static memory allocation is the process of allocating memory before the program is executed.
+Heap memory should be treated as a resource that is allocated dynamically.
+There are 2 types of data structures logical and physical in computer science.
+physical data structures are those that are stored in the main memory like  arrays and linked list only.
+They physically hold data
+Logical data structures make use of physical data structures to store data.like stack and queue
+Stack is a LIFO data structure
+Queue is a FIFO data structure
+Abstract data types are data types that are not defined in the program but are used in the program like int,float,char,string etc
+O(1) is the time complexity of a constant time operation
+O(log n) is the time complexity of a logarithmic time operation
+O(n) is the time complexity of a linear time operation like using for loop to find sum of all the elements in an array
+O is found out by the programmer by analysing code and procedure
+Binary sort has a time complexity of O(n log n)
+if no.of elements are constantly divided by 2 then its O(log n)
+void swap(int *a,int *b)
+{
+    int temp;
+    temp=*a; /1
+    *a=*b; /1 
+    *b=temp;/1
+}
+//hence complexity of above function is O(1) as f(n) = 3*n^0
+int sum(int A[],int n)
+{
+    int i,sum=0;//1 sum =0
+    for(i=0;i<n;i++) // i = 0 -1 i++ n+1
+    {
+        sum=sum+A[i]; //n
+    }
+    return sum;//1
+}])
+f(n )=2*n +3
+//hence complexity of above function is O(n)

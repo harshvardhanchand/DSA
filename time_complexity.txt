@@ -1,0 +1,17 @@
+Big O only gives us rough idea of time complexity,by looking at the highest degree variable.
+recurrence relation is the key to understanding time complexity, and it is the most important thing to understand.
+lets take a function
+f(n) = f(n-1) + f(n-2) // for fibonnaci series given n>1
+void fun1(int n)
+{
+    if(n>0)
+    {
+        printf("%d\n",n);
+        fun1(n-1);
+    }
+    
+}
+recurrence relation in this case is f(n)=f(n-1) + 1
+we can take out big O by indunction  i.e f(n) = f(n-2) + 2
+so we can say that big O is O(n) as f(n) = f(n-k) + k//n-k=0
+as f(0)=0, so big O is O(1) so O = n+1 for fun1

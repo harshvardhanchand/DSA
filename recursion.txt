@@ -1,0 +1,13 @@
+static  variables in recursion
+There are 5 types of recursion
+1.Tail recursion
+2.Head recursion
+3.Tree recursion
+4.Indirect recursion
+5.Nested recursion
+1.Tail recursion recursive call is always at the end of the function,only recursion is peformed at the end nothing else
+recursion is time consuming, in most cases we are better off in terms of time complexity to convert tail recursion into a loop
+2.Head recursion recursive call is always at the beginning of the function,only recursion is peformed at the beginning nothing else.
+3.Tree recursion is when the recursion is performed in the middle of the function,recursion is peformed at the middle nothing else,more than one level of recursion.
+4.Indirect recursion: multiple functions are calling each other becoming a cycle of functions calling each other
+5.Nested recursion: a function is calling another function which is calling the first function.

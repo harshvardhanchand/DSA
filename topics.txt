@@ -1,0 +1,11 @@
+1.Arrays
+2.Matrices
+3.Linked Lists
+4.Stacks
+5.Queues
+6.Trees
+7.Graphs
+8.Sorting
+9.Hashing
+Recursion
+
