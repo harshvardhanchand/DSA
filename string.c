@@ -170,3 +170,80 @@ void find_duplicate_hash(char *str)
    
 
 }
+//BITWISE duplicate characters  in bitwise operation the hash array goes from right to left i.e 0 is the rightmost bit
+// 1.Mask the bit(masking)(checking on or off) take a variable H of 1 byte having 1s and 0s and take a variable A of 1 byte having all 0s and 1 at end 
+// suppose we want to know whether the bit at position i is set or not we left sheft a 1 by i and AND it with H if it is all 0s then it is not set
+//2Merging the bits- setting a particular bit on a particular position H of 1 byte AND A of 1 byte with all zeros and 1 at end left shift and 0R them and then use H= H|A
+void find_duplicate_bitwise(char *str)
+{
+    int i=0;
+    long int H=0;
+    long int A=0;
+    for(i=0;str[i]!='\0';i++)
+    {
+        A=1;
+        A=A<<(str[i]-97);
+        if(A&H>0) //if A and H are all 0s then it is not set hence not a duplicate
+        {
+            printf("%c\n",str[i]);
+        }
+        else
+        {
+            H=H|A; //if A and H are not all 0s then it is set hence a duplicate so we set it
+        }
+    }
+}
+int check_anagram(char *str1,char *str2)
+{
+    int i=0;
+    int B[26]={0};
+
+    for(i=0;str1[i]!='\0';i++)
+    {
+        B[str1[i]-97]++;
+    }
+    for(i=0;str2[i]!='\0';i++)
+    {
+        B[str2[i]-97]--; // this also works in duplicates
+    }
+    for(i=0;i<26;i++)
+    {
+        if(B[i]<0)
+        {
+            return 0;
+        }
+
+    }
+    return 1;
+}
+//Function to swap two characters
+void swap(char *str,char *str1)
+{
+    char temp=*str;
+    *str=*str1;
+    *str1=temp;
+}
+
+  
+//We can use backtracking to find permuations of a string
+//1.We can take two arrays one for the string and another for the permutations
+//2.We can take a temporary array to store the characters of the string
+//3.We can take a temporary array to store the permutations
+// We have to see if we have any steps left if not then backtrack
+
+void perm(char s[],int l,int h)
+{
+    if(l==h)
+    {
+        printf("%s\n",s);
+    }
+    else
+    {
+        for(int i=l;i<=h;i++)
+        {
+            swap(s[l],s[i]);
+            perm(s,l+1,h);
+            swap(s[l],s[i]);
+        }
+    }
+}
