@@ -7,7 +7,7 @@ struct node
 {
     int data;
     struct node *next;
-} *First = NULL;
+} *First = NULL, *Second = NULL, *Third = NULL;
 void create(int A[], int n)
 {
     int i;
@@ -25,6 +25,85 @@ void create(int A[], int n)
         last = temp;
     }
 }
+void create2(int A[], int n)
+{
+    int i;
+    struct node *temp, *last;
+    Second = (struct node *)malloc(sizeof(struct node));
+    Second->data = A[0];
+    Second->next = NULL;
+    last = Second;
+    for (i = 1; i < n; i++)
+    {
+        temp = (struct node *)malloc(sizeof(struct node));
+        temp->data = A[i];
+        temp->next = NULL;
+        last->next = temp;
+        last = temp;
+    }
+}
+void Merge(struct node *p, struct node *q)
+{
+    struct node *last;
+    if (p->data < q->data)
+    {
+        Third = last = p;
+        p = p->next;
+        Third->next = NULL;
+    }
+    else
+    {
+        Third = last = q;
+        q = q->next;
+        Third->next = NULL;
+    }
+    while (p != NULL && q != NULL)
+    {
+        if (p->data < q->data)
+        {
+            last->next = p;
+            last = p;
+            p = p->next;
+            last->next = NULL;
+        }
+        else
+        {
+            last->next = q;
+            last = q;
+            q = q->next;
+            last->next = NULL;
+        }
+    }
+    if (p == NULL)
+    {
+        last->next = q;
+    }
+    else
+    {
+        last->next = p;
+    }
+}
+int isLoop(struct node *f)
+{
+    struct node *p, *q;
+    p = q = f;
+    do
+    {
+        p = p->next;
+        q = q->next;
+        q = q ? q->next : q;
+        /* code */
+    } while (p && q && p != q);
+    if (p == q)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 void Display(struct node *p)
 {
     while (p != NULL)
@@ -219,8 +298,8 @@ int delete (struct node *p, int index)
 }
 int check_if_sorted(struct node *p)
 {
-    struct
-        int x = -32768;
+
+    int x = -32768;
     int i;
     while (p != NULL)
     {
@@ -233,12 +312,85 @@ int check_if_sorted(struct node *p)
     }
     return 1;
 }
+void remove_duplicates(struct node *p)
+{
+    struct node *q = p->next;
+    while (q != NULL)
+    {
+        if (p->data != q->data)
+        {
+            p = q;
+            q = q->next;
+        }
+        else
+        {
+            p->next = q->next; //
+            free(q);           // free the memory to which q is pointed to and make q point to the next node
+            q = p->next;
+        }
+    }
+}
+// There are 2 methods to reverse linked list
+//  1.Reversing elements
+//  2.Reversing links
+// 1. we create another array copy linked list elements into it then copy arrays elements in reverse
+void reverse(struct node *p)
+{
+    p = First;
+    int i = 0;
+    int A[count(p)];
+    while (p != NULL)
+    {
+        A[i] = p->data;
+        p = p->next;
+        i++;
+    }
+    p = First;
+    i--;
+    while (p != NULL)
+    {
+        p->data = A[i];
+        p = p->next;
+        i--;
+    }
+}
+// 2 we create 3 pointer to nodes one for node doing reversing one for node behind it and another for node in front of it
+void reverse_links(struct node *p)
+{
+    p = First;
+    struct node *q = NULL;
+    struct node *r = NULL;
+    while (p != NULL)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    First = q;
+}
+void reverse_recursive(struct node *q, struct node *p)
+{
+    if (p != NULL)
+    {
+        reverse_recursive(p, p->next);
+        p->next = q;
+    }
+    else
+    {
+        First = q;
+    }
+}
 int main()
 {
     struct node *temp;
     int A[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int B[] = {5, 6, 9, 11, 14, 15, 18, 20, 21, 22};
+    int n1 = sizeof(B) / sizeof(B[0]);
     int n = sizeof(A) / sizeof(A[0]);
     create(A, n);
+    create2(B, n1);
+
     Display(First);
     insert(First, 2, 11);
     max(First);
@@ -246,6 +398,17 @@ int main()
     bring_to_head(First, 11);
     Display(First);
     delete (First, 2);
+    Display(First);
+    SortedInsert(First, 11);
+    Display(First);
+    check_if_sorted(First);
+    remove_duplicates(First);
+    Display(First);
+    reverse(First);
+    Display(First);
+    reverse_links(First);
+    Display(First);
+    reverse_recursive(NULL, First);
     Display(First);
     printf("\n");
     return 0;

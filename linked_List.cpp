@@ -1,188 +1,106 @@
 #include <iostream>
 using namespace std;
-// make a template  class of linked list with all its functions
-template <typename T>
+
+// make a template class of node
+template <class T>
+class node
+{
+public:
+    T data;
+    node *next;
+};
+
+template <class T>
 class linked_list
 {
 private:
-    struct node
-    {
-        T data;
-        node *next;
-    };
-    node *head;
-    node *tail;
-    int size;
+    node<T> *first;
 
 public:
     linked_list()
     {
-        head = NULL;
-        tail = NULL;
-        size = 0;
+        first = NULL;
     }
-    ~linked_list()
+    linked_list(T A[], int size);
+    ~linked_list();
+    void print();
+    void insert(int index, T data);
+    void delete_node(int index);
+    int length();
+};
+linked_list<int>::linked_list(int A[], int size)
+{
+    first = NULL;
+    for (int i = 0; i < size; i++)
     {
-        node *temp;
-        while (head != NULL)
-        {
-            temp = head;
-            head = head->next;
-            delete temp;
-        }
+        insert(i, A[i]);
     }
-    void push_back(T data)
+}
+linked_list<int>::~linked_list()
+{
+    node<int> *temp;
+    while (first != NULL)
     {
-        node *temp = new node;
-        temp->data = data;
-        temp->next = NULL;
-        if (head == NULL)
-        {
-            head = temp;
-            tail = temp;
-        }
-        else
-        {
-            tail->next = temp;
-            tail = temp;
-        }
-        size++;
-    }
-    void push_front(T data)
-    {
-        node *temp = new node;
-        temp->data = data;
-        temp->next = NULL;
-        if (head == NULL)
-        {
-            head = temp;
-            tail = temp;
-        }
-        else
-        {
-            temp->next = head;
-            head = temp;
-        }
-        size++;
-    }
-    void pop_back()
-    {
-        if (head == NULL)
-        {
-            cout << "List is empty" << endl;
-            return;
-        }
-        node *temp = head;
-        while (temp->next != tail)
-        {
-            temp = temp->next;
-        }
-        delete tail;
-        tail = temp;
-        tail->next = NULL;
-        size--;
-    }
-    void pop_front()
-    {
-        if (head == NULL)
-        {
-            cout << "List is empty" << endl;
-            return;
-        }
-        node *temp = head;
-        head = head->next;
+        temp = first;
+        first = first->next;
         delete temp;
-        size--;
     }
-    void print()
+}
+void linked_list<int>::print()
+{
+    node<int> *temp = first;
+    while (temp != NULL)
     {
-        node *temp = head;
-        while (temp != NULL)
-        {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }
-        cout << endl;
+        cout << temp->data << " ";
+        temp = temp->next;
     }
-    int get_size()
+    cout << endl;
+}
+void linked_list<int>::insert(int index, int data)
+{
+    node<int> *temp = first;
+    node<int> *new_node = new node<int>;
+    new_node->data = data;
+    new_node->next = NULL;
+    if (index == 0)
     {
-        return size;
+        new_node->next = first;
+        first = new_node;
     }
-    T get_data(int index)
+    else
     {
-        node *temp = head;
-        for (int i = 0; i < index; i++)
-        {
-            temp = temp->next;
-        }
-        return temp->data;
-    }
-    void set_data(int index, T data)
-    {
-        node *temp = head;
-        for (int i = 0; i < index; i++)
+        for (int i = 0; i < index - 1; i++)
         {
             temp = temp->next;
         }
-        temp->data = data;
-    }
-    void insert(int index, T data)
-    {
-        node *temp = head;
-        for (int i = 0; i < index; i++)
-        {
-            temp = temp->next;
-        }
-        node *new_node = new node;
-        new_node->data = data;
         new_node->next = temp->next;
         temp->next = new_node;
-        size++;
     }
-    void erase(int index)
+}
+void linked_list<int>::delete_node(int index)
+{
+    node<int> *temp = first;
+    if (index == 0)
     {
-        node *temp = head;
-        for (int i = 0; i < index; i++)
+        first = first->next;
+    }
+    else
+    {
+        for (int i = 0; i < index - 1; i++)
         {
             temp = temp->next;
         }
-        node *temp2 = temp->next;
         temp->next = temp->next->next;
-        delete temp2;
-        size--;
     }
-    void reverse()
+}
+int linked_list<int>::length()
+{
+    node<int> *temp = first;
+    int count = 0;
+    while (temp != NULL)
     {
-        node *temp = head;
-        node *temp2 = NULL;
-        while (temp != NULL)
-        {
-            temp2 = temp->next;
-            temp->next = temp2->next;
-            temp2->next = head;
-            head = temp2;
-            temp = temp->next;
-        }
-        tail = temp2;
+        count++;
+        temp = temp->next;
     }
-    void sort()
-    {
-        node *temp = head;
-        node *temp2 = NULL;
-        while (temp != NULL)
-        {
-            temp2 = temp->next;
-            while (temp2 != NULL)
-            {
-                if (temp->data > temp2->data)
-                {
-                    T temp_data = temp->data;
-                    temp->data = temp2->data;
-                    temp2->data = temp_data;
-                }
-                temp2 = temp2->next;
-            }
-            temp = temp->next;
-        }
-    }
-};
+    return count;
+}
