@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 // linked list stores data in a heap and unlike array is not contiguous in memory,i.e one element points to another element in a different location and so on
+// array is faster to access if it is in stack memory
+// insertion operator is same in both vis a vis time complexity
+// In data momvement linked list is better,left side is faster in linked list and right side is faster in array
+// Binary search  will take nlogn time in linked list and logn time in array
 
 // structure of a node
 struct node
