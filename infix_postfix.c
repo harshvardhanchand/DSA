@@ -179,5 +179,6 @@ int main()
     push('#');
     char *postfix = InToPost(infix);
     printf("%s\n", postfix);
+    printf("%d\n", eval(postfix));
     return 0;
 }
