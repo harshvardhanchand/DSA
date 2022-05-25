@@ -3,7 +3,7 @@
 // Recursion: A function that calls itself
 // Recursion is a function that calls itself
 
-void fun(int n)//tail recursion
+void fun(int n) // tail recursion
 {
     if (n == 0)
     {
@@ -15,7 +15,7 @@ void fun(int n)//tail recursion
         fun(n - 1);
     }
 }
-//head recursion
+// head recursion
 void fun1(int n)
 {
     if (n == 0)
@@ -28,109 +28,129 @@ void fun1(int n)
         printf("%d ", n);
     }
 }
-//Tree recursion
+// Tree recursion
 void funC(int n)
 {
-    if(n>0)
+    if (n > 0)
     {
-        printf("%d ",n);
-        funC(n-1);
-        
-        fun(n-1);
+        printf("%d ", n);
+        funC(n - 1);
+
+        fun(n - 1);
     }
-}//end of fun time 2^n time complexity Space complexity O(n)
-//Indirect recursion
+} // end of fun time 2^n time complexity Space complexity O(n)
+// Indirect recursion
 void funB(int n);
 void funA(int n)
 {
-    if(n>0)
+    if (n > 0)
     {
-        
-        printf("%d ",n);
-        funB(n-1);
+
+        printf("%d ", n);
+        funB(n - 1);
     }
 }
 void funB(int n)
 {
-    if(n>0)
+    if (n > 0)
     {
-        
-        printf("%d ",n);
-        funA(n/2);
+
+        printf("%d ", n);
+        funA(n / 2);
     }
 }
-//Nested recursion
+// Nested recursion
 int fun3(int n)
 {
-    if(n>100)
+    if (n > 100)
     {
-        return n-10;
+        return n - 10;
     }
     else
     {
-        return fun3(fun3(n+11));
+        return fun3(fun3(n + 11));
     }
 }
-//factorial recursion
+// factorial recursion
 int fun4(int n)
 {
-    if(n>1)
+    if (n > 1)
     {
-        return n*fun4(n-1);
+        return n * fun4(n - 1);
     }
     else
     {
         return 1;
     }
-    
 }
-int exponent(int m,int n)
+int exponent(int m, int n)
 {
-    if(n==0)
+    if (n == 0)
     {
         return 1;
     }
     else
     {
-        return m*exponent(m,n-1);
-        
-
+        return m * exponent(m, n - 1);
     }
-    
 }
 // we can write a more efficent exponent function
-int exponent1(int m,int n)
+int exponent1(int m, int n)
 {
-    if(n==0)
+    if (n == 0)
     {
         return 1;
     }
-    else if(n%2==0)
+    else if (n % 2 == 0)
     {
-        return exponent1(m*m,n/2); //reduces no.of multiplications
+        return exponent1(m * m, n / 2); // reduces no.of multiplications
     }
     else
     {
-        return m*exponent1(m*m,(n-1)/2);
+        return m * exponent1(m * m, (n - 1) / 2);
     }
-    
 }
-int taylor_series(int n,int x)
+// a function to get derivative of a function
+double derivative(double (*f)(double), double x)
 {
-    if(n==1)
+    double h = 0.00001;
+    return (f(x + h) - f(x)) / h;
+}
+// a function to create a mathametical function of integer x
+int factor(int n)
+{
+    if (n == 0 || n == 1)
     {
         return 1;
     }
     else
     {
-        return 1+ taylor_series()
-
+        return n * factor(n - 1);
     }
+}
+void print_n_factorial(int n)
+{
+    int i;
+    for (i = 1; i <= n; i++)
+    {
+        printf("%d ", factor(i));
+    }
+}
+void print_n_natural_number(int n)
+{
+    int i;
+    for (i = 1; i <= n; i++)
+    {
+        printf("%d ", i);
+    }
+}
 
+void taylor_series(int n, int a, int b)
+{
 }
 
 int main()
 {
-    printf("%d",exponent(2,3));
+    printf("%d", exponent(2, 3));
     return 0;
 }
