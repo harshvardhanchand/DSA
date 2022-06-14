@@ -353,7 +353,7 @@ int main()
 
     // BST from Preorder traversal
     cout << "BST from Preorder: " << flush;
-    int pre[] = {30, 20, 10, 15, 25, 40, 50, 45};
+    int pre[] = {50, 15, 62, 5, 20, 58, 91, 3, 8, 37, 60, 24};
     int n = sizeof(pre) / sizeof(pre[0]);
 
     BST b;

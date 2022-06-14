@@ -195,15 +195,22 @@ void create(int pre[], int n)
         }
         else
         {
-            t = (struct Node *)malloc(sizeof(struct Node));
-            t->data = pre[i++];
-            t->lchild = NULL;
-            t->rchild = NULL;
-            p->rchild = t;
-            p = t;
+            if (pre[i] > p->data && pre[i] < s->top->data)
+            {
+                t = (struct Node *)malloc(sizeof(struct Node));
+                t->lchild = NULL;
+                t->rchild = NULL;
+                p->rchild = t;
+                p = t;
+            }
+            else
+            {
+                p = pop(s);
+            }
         }
-        }
+    }
 }
+// Drawbacks: Height of a tree can vary from O(log n) to O(n).We have no control over height of a tree.depends on order of insertion
 
 int main()
 {
