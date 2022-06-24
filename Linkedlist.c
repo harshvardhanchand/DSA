@@ -239,6 +239,7 @@ void insert(struct node *p, int pos, int x)
         printf("index invalid");
     }
 }
+
 void SortedInsert(struct node *p, int x)
 {
     struct node *t;
@@ -274,12 +275,12 @@ int delete (struct node *p, int pos)
     struct node *q = NULL;
     int x = -1;
     int i;
-    if (pos < 1 || pos > count(p))
+    if (pos < 0 || pos > count(p))
     {
         printf("index invalid");
         return -1;
     }
-    if (pos == 1)
+    if (pos == 0)
     {
         x = First->data;
         q = First;
