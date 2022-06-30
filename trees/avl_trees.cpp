@@ -231,6 +231,8 @@ void AVL::Inorder(Node *p)
         Inorder(p->rchild);
     }
 }
+// There are 6 types of deletion L1 L-1 L0 R1 R-1 R0 (1-LL RR 2- LR RL ,0 -Any one)
+// deciding which deletion to go through is decided by child of unbalanced node
 
 Node *AVL::Delete(Node *p, int key)
 {
@@ -305,6 +307,10 @@ Node *AVL::Delete(Node *p, int key)
 
     return p;
 }
+// Height analysis for avl trees
+//  max nodes = 2^h-1 (starting from h=1 , we can take zero also)
+// min nodes = n(h-1) + n(h-2) +1
+// for min height invert the above formula
 
 int main()
 {
