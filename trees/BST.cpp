@@ -29,6 +29,7 @@ public:
     Node *InPre(Node *p);
     Node *InSucc(Node *p);
     void createFromPreorder(int pre[], int n);
+    bool isBalanced(Node *p);
 };
 
 void BST::iInsert(int key)
@@ -281,6 +282,20 @@ void BST::createFromPreorder(int *pre, int n)
         }
     }
 }
+bool BST::isBalanced(Node *p)
+{
+    if (p == nullptr)
+    {
+        return true;
+    }
+    int lh = Height(p->lchild);
+    int rh = Height(p->rchild);
+    if (abs(lh - rh) > 1)
+    {
+        return false;
+    }
+    return isBalanced(p->lchild) && isBalanced(p->rchild);
+}
 
 int main()
 {
@@ -360,6 +375,8 @@ int main()
     b.createFromPreorder(pre, n);
     b.Inorder(b.getRoot());
     cout << endl;
+
+    cout << "Is BST balanced: " << b.isBalanced(b.getRoot()) << endl;
 
     return 0;
 }
